@@ -1,0 +1,46 @@
+# Text editors
+.idea
+*.sublime-project
+*.sublime-workspace
+*.orig
+*.bak
+
+# System
+/bitrix
+/upload
+/images
+.htaccess
+.DS_Store
+Thumbs.db
+.bash_logout
+.bashrc
+.profile
+web.config
+.ssh
+*.html
+
+# Text files
+*.xml
+*.xlsx
+*.xls
+*.csv
+*.txt
+*.log
+
+# Archives
+*.tar.gz*
+*.tar
+*.zip
+*.7z
+*.cab
+*.exe
+*.rar
+*.pak
+*.zipx
+
+# Some tools
+/vendor
+
+# Node.JS
+node_modules
+npm-debug.log
