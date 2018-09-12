@@ -1,0 +1,47 @@
+{
+  "name": "digital-spectr-html-markup",
+  "version": "0.0.1",
+  "description": "Quick start markup",
+  "scripts": {
+    "start": "gulp production",
+    "dev": "gulp default",
+    "watch": "gulp watch"
+  },
+  "author": "Digital Spectr <man@digital-spectr.ru> (http://digital-spectr.ru)",
+  "license": "MIT",
+  "dependencies": {
+    "gulp-connect": "^5.0.0",
+    "gulp-if": "^2.0.2",
+    "normalize-path": "^2.1.1"
+  },
+  "devDependencies": {
+    "bower": "*",
+    "del": "*",
+    "emitty": "^1.4.1",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "*",
+    "gulp-bower": "*",
+    "gulp-bower-files": "*",
+    "gulp-clean-css": "^2.0.9",
+    "gulp-concat": "*",
+    "gulp-filter": "*",
+    "gulp-imagemin": "^4.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-pug-lint": "^0.1.6",
+    "gulp-rigger": "^0.5.8",
+    "gulp-rimraf": "*",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "*",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.8",
+    "gulp-watch": "^4.1.1",
+    "gulp-webserver": "^0.9.1",
+    "gulp.spritesmith": "*",
+    "main-bower-files": "*",
+    "uglifyify": "^3.0.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  },
+  "pugLintConfig": {}
+}
