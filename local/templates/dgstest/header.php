@@ -161,7 +161,7 @@ $theme = COption::GetOptionString("main", "wizard_eshop_bootstrap_theme_id", "bl
 			<?
 			$hideSidebar =
 				defined("HIDE_SIDEBAR") && HIDE_SIDEBAR == true
-				|| preg_match("~^".SITE_DIR."(catalog|personal\\/cart|personal\\/order\\/make)/~", $curPage)
+				|| preg_match("~^".SITE_DIR."(news|catalog|personal\\/cart|personal\\/order\\/make)/~", $curPage)
 			? true : false;
 			?>
 				<div class="bx-content <?=($hideSidebar ? "col-xs-12" : "col-md-9 col-sm-8")?>">
