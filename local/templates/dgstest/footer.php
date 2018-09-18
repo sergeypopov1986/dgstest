@@ -1,6 +1,9 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 					</div>
-					<?if (!$hideSidebar):?>
+					<?
+                    global $hideSidebar;
+                    if (!$hideSidebar):
+                        ?>
 					<div class="sidebar col-md-3 col-sm-4">
 						<?$APPLICATION->IncludeComponent(
 							"bitrix:main.include",
@@ -126,6 +129,25 @@
 
 
 		</footer>
+        <div id="win8_wrapper">
+            <div class="windows8">
+                <div class="wBall" id="wBall_1">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_2">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_3">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_4">
+                    <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_5">
+                    <div class="wInnerBall"></div>
+                </div>
+            </div>
+        </div>
 		<div class="col-xs-12 hidden-lg hidden-md hidden-sm">
 			<?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "", array(
 					"PATH_TO_BASKET" => SITE_DIR."personal/cart/",

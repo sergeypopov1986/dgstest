@@ -2,7 +2,7 @@
 use Bitrix\Main\Page\Asset;
 $assets = Asset::getInstance();
 IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMPLATE_ID."/header.php");
-CJSCore::Init(array("fx"));
+CJSCore::Init(array("fx" , "jquery"));
 $curPage = $APPLICATION->GetCurPage(true);
 $theme = COption::GetOptionString("main", "wizard_eshop_bootstrap_theme_id", "blue", SITE_ID);
 ?>
@@ -159,6 +159,7 @@ $theme = COption::GetOptionString("main", "wizard_eshop_bootstrap_theme_id", "bl
 		<div class="container bx-content-seection">
 			<div class="row">
 			<?
+            global $hideSidebar;
 			$hideSidebar =
 				defined("HIDE_SIDEBAR") && HIDE_SIDEBAR == true
 				|| preg_match("~^".SITE_DIR."(news|catalog|personal\\/cart|personal\\/order\\/make)/~", $curPage)
