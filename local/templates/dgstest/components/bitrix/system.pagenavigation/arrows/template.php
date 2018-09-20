@@ -11,9 +11,16 @@ if(!$arResult["NavShowAlways"])
         return;
 }
 $strNavQueryString = ($arResult["NavQueryString"] != "" ? $arResult["NavQueryString"]."&amp;" : "");
+
+if ($arResult["NavPageNomer"] < $arResult["NavPageCount"])
+{
+    $nextHref = $arResult["sUrlPath"].'?'.$strNavQueryString.'PAGEN_'.$arResult["NavNum"].'='.($arResult["NavPageNomer"]+1);
+}else{
+    $nextHref = "";
+}
 ?>
 
-<button id="show-more-btn" data-next-page="<?=$arResult["sUrlPath"].'?'.$strNavQueryString.'PAGEN_'.$arResult["NavNum"].'='.($arResult["NavPageNomer"]+1)?>" class="sender-btn btn-subscribe btn-subscribe--no-img">Показать еще</button>
+<button id="show-more-btn" data-next-page="<?=$nextHref?>" class="sender-btn btn-subscribe btn-subscribe--no-img">Показать еще</button>
 
 <div class="navigation">
     <?

@@ -86,10 +86,10 @@ $(function(){
                 dataType: 'html'
             }).done(function(responce){
                 $('.ajax-news-list').append($(responce).find('.ajax-news-list').html());
-                var nextPageHref = $(responce).find('#show-more-btn').attr('data-next-page');
-                console.log(nextPageHref);
-                $('#show-more-btn').attr('data-next-page' , nextPageHref);
+                var nextPage = $(responce).find('#show-more-btn').data('next-page');
+                $('#show-more-btn').data('next-page' , nextPage);
                 $('.navigation-pages').html($(responce).find('.navigation-pages').html());
+                history.pushState(null , null , nextPageUrl);
             }).always(function(){
                 BX.closeWait();
             });
