@@ -1,0 +1,27 @@
+{
+   "name":"arcticmodalbw",
+   "version":"0.3.2",
+   "repository":{
+      "type":"git",
+      "url":"git://github.com/kostysh/arcticModalBw.git"
+   },
+   "main":[
+      "arcticmodal/jquery.arcticmodal.css",
+      "arcticmodal/jquery.arcticmodal.min.js",
+      "arcticmodal/loading.gif"
+   ],
+   "description":"jQuery plugin for modal boxes development",
+   "dependencies":{
+      "jquery":">= 1.8.2"
+   },
+   "ignore":[
+      ".*"
+   ],
+   "keywords":[
+      "jquery",
+      "javascript",
+      "modal"
+   ],
+   "homepage":"http://arcticlab.ru/arcticmodal",
+   "license":"http://arcticlab.ru/arcticmodal"
+}

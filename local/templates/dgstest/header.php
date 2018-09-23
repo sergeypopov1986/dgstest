@@ -2,7 +2,7 @@
 use Bitrix\Main\Page\Asset;
 $assets = Asset::getInstance();
 IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMPLATE_ID."/header.php");
-CJSCore::Init(array("fx"));
+CJSCore::Init(array("fx" , "jquery"));
 $curPage = $APPLICATION->GetCurPage(true);
 $theme = COption::GetOptionString("main", "wizard_eshop_bootstrap_theme_id", "blue", SITE_ID);
 ?>
@@ -18,6 +18,8 @@ $theme = COption::GetOptionString("main", "wizard_eshop_bootstrap_theme_id", "bl
 	$APPLICATION->SetAdditionalCSS("/bitrix/css/main/bootstrap.css");
 	$APPLICATION->SetAdditionalCSS("/bitrix/css/main/font-awesome.css");
 	$assets->addCss(SITE_TEMPLATE_PATH.'/assets/css/_style.css');
+	$assets->addCss(SITE_TEMPLATE_PATH.'/assets/css/_vendor.css');
+    $assets->addJs(SITE_TEMPLATE_PATH.'/assets/js/_vendor.js');
 	$assets->addJs(SITE_TEMPLATE_PATH.'/assets/js/_main.js');
 	?>
 	<title><?$APPLICATION->ShowTitle()?></title>

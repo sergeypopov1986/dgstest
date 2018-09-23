@@ -8,9 +8,9 @@ var path = {
     },
     src: { //Пути откуда брать исходники
         js: 'js/*.js',
-        jsLibsDir: 'js/libs/',
+        jsLibsInit: 'bower_components/vendor.js',
+        cssLibsInit: 'bower_components/vendor.css',
         style: 'css/*.sass',
-        styleLibsDir: 'css/libs/',
     },
     watch: {
         html: '*.html',
@@ -56,30 +56,17 @@ gulp.task('connect', function () {
 });
 
 gulp.task('bower', function () {
-    var bowerFiles = require('main-bower-files')({
-        checkExistence: true
-    });
-
-    bowerFiles.push('./bower_components/jquery-ui/themes/ui-lightness/jquery-ui.css');
-
-    var jsFilter = filter(function (file) {
-        return file.path.match(/\.(js)$/i);
-    });
-    var cssFilter = filter(function (file) {
-        return file.path.match(/\.(css)$/i);
-    });
-    gulp.src(bowerFiles)
-        .pipe(jsFilter)
+    gulp.src(path.src.cssLibsInit)
+        .pipe(rigger())
+        .pipe(concat('_vendor.css'))
+        .pipe(cssmin())
+        .pipe(gulp.dest(path.build.css));
+    return gulp.src(path.src.jsLibsInit)
+        .pipe(rigger())
         .pipe(concat('_vendor.js'))
         .pipe(uglify())
         //.pipe(gulp.dest(path.src.jsLibsDir))
-        .pipe(gulp.dest(path.build.js))
-    ;
-
-    return gulp.src(bowerFiles)
-        .pipe(cssFilter)
-        .pipe(concat('_vendor.scss'))
-        .pipe(gulp.dest(path.src.styleLibsDir));
+        .pipe(gulp.dest(path.build.js));
 });
 
 //таска, которая собирает нам наши скрипты

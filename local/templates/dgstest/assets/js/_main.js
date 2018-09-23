@@ -1,1 +1,1 @@
-$(function(){alert("!!!")});
+$(function(){$("#fa-custom-ajax-form").validate({rules:{FA_PHONE:{required:!0}},messages:{FA_PHONE:{required:"Обязательно для заполнения"}},submitHandler:function(e){$(e).serialize();return!1}}),$('input[name="FA_PHONE"]').mask("(999) 99-99-999")});
