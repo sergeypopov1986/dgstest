@@ -146,7 +146,12 @@
 			);?>
 		</div>
 	</div> <!-- //bx-wrapper -->
-
+<div style="display: none;">
+    <div class="box-modal" id="exampleModal">
+        <div class="box-modal_close arcticmodal-close">закрыть</div>
+        <p></p>
+    </div>
+</div>
 
 <script>
 	BX.ready(function(){
