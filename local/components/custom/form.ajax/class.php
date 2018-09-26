@@ -13,9 +13,11 @@ class FormAjaxComponent extends \CBitrixComponent
 
     protected $needModules = ['iblock'];
     protected $fieldValidateCallbacks = [
-        'FA_NAME' => ['htmlspecial'],
-        'FA_PHONE' => ['validPhone'],
-        'SESSID' => ['validSession'],
+        'FA_NAME' => FILTER_SANITIZE_ENCODED,
+        'FA_PHONE' => [
+            'filter' => FILTER_VALIDATE_REGEXP,
+            'options' => ['regexp' => self::PHONE_PREG]
+        ]
     ];
 
     protected $fieldsValid = [];
@@ -25,31 +27,14 @@ class FormAjaxComponent extends \CBitrixComponent
             && \Bitrix\Main\Context::getCurrent()->getRequest()->isAjaxRequest();
     }
 
-    private function validPhone($val){
-        if(!preg_match(self::PHONE_PREG , $val)){
-            $this->arResult['ERRORS']['FA_PHONE'] = Loc::getMessage('FA_ERROR_PHONE_FORMAT');
-        }else{
-            $this->fieldsValid['PHONE'] = $val;
-        }
-    }
-
-    private function validSession($val){
-        if(!check_bitrix_sessid('SESSID')){
-            $this->arResult['ERRORS']['SESSID'] = Loc::getMessage('FA_ERROR_SESSION_EXPIRED');
-        }
-    }
-
-    private function htmlspecial($val){
-        if($val)
-            $this->fieldsValid['NAME'] = htmlspecialcharsEx($val);
-    }
-
     protected function validateFormFields(){
-        foreach ($this->fieldValidateCallbacks as $nameField => $callbacks) {
-            if($callbacks){
-                foreach ($callbacks as $callback) {
-                    filter_input(INPUT_POST, $nameField, FILTER_CALLBACK, array('options' => [$this , $callback]));
-                }
+        $this->fieldsValid = filter_input_array(INPUT_POST , $this->fieldValidateCallbacks , false);
+    }
+
+    protected function prepareValidatedFields(){
+        foreach ($this->fieldsValid as $name => $field) {
+            if($field === false){
+                $this->arResult['ERRORS'][$name] = Loc::getMessage($name.'_VALIDATE_ERROR');
             }
         }
     }
@@ -68,10 +53,10 @@ class FormAjaxComponent extends \CBitrixComponent
 
     protected function saveData(){
         $cib = new CIBlockElement;
-        if($this->fieldsValid['PHONE']){
+        if($this->fieldsValid['FA_PHONE']){
             $ib = new CIBlockElement;
             $res = $ib->Add([
-                "NAME" => "Заявка". (($this->fieldsValid["NAME"])?" от ".$this->fieldsValid["NAME"]:''),
+                "NAME" => "Заявка". (($this->fieldsValid["FA_NAME"])?" от ".$this->fieldsValid["FA_NAME"]:''),
                 "ACTIVE" => "Y",
                 "IBLOCK_ID" => IBLOCK_PROPOSAL_ID,
                 "PROPERTY_VALUES" => $this->fieldsValid
@@ -80,7 +65,7 @@ class FormAjaxComponent extends \CBitrixComponent
     }
 
     protected function sendEmail(){
-        $this->fieldsValid['TITLE'] = "Заявка". (($this->fieldsValid["NAME"])?" от ".$this->fieldsValid["NAME"]:'');
+        $this->fieldsValid['TITLE'] = "Заявка". (($this->fieldsValid["FA_NAME"])?" от ".$this->fieldsValid["FA_NAME"]:'');
         CEvent::Send(PROPOSAL_EMAIL_EVENT, SITE_ID, $this->fieldsValid);
     }
 
@@ -92,14 +77,13 @@ class FormAjaxComponent extends \CBitrixComponent
         }
     }
 
-
-
     public function execute(){
         global $APPLICATION;
         if ($this->isAjax()) {
             $APPLICATION->RestartBuffer();
         }
         $this->validateFormFields();
+        $this->prepareValidatedFields();
         $this->actions();
         if ($this->isAjax()) {
             die(json_encode($this->arResult));
