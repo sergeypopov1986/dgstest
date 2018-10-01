@@ -9,3 +9,5 @@ define("P_INCLUDE", SITE_DIR . "include_areas/");
 define("P_LIBRARY", P_APP_PATH . "libs/");
 define("P_CLASSES", P_PHP_INTERFACE . "classes/");
 define("P_MARKUP", P_APP . "");
+
+define("HLB_USER_DATA_ID" , 3);

@@ -8,7 +8,7 @@ class GeoIP
         $this->soapClient = new SoapClient($this->soapUrl , array('soap_version'   => SOAP_1_2));
     }
 
-    protected function GetClientIP()
+    public function GetClientIP()
     {
         $client  = @$_SERVER['HTTP_CLIENT_IP'];
         $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -25,7 +25,7 @@ class GeoIP
         try{
             $responce = $this->soapClient->ResolveIP(
                 [
-                    "ipAddress" => $this->GetClientIP(),
+                    "ipAddress" => ($ip)?$ip:$this->GetClientIP(),
                     "licenseKey" => "0"
                 ]
             );
